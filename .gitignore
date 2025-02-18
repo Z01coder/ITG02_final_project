@@ -1,0 +1,56 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django stuff:
+*.log
+*.pot
+*.mo
+*.db
+*.sqlite3
+*.sqlite3-journal
+
+# Local development settings and databases
+/local_settings.py
+/db.sqlite3
+/.env
+
+# Virtual environment
+/venv/
+/env/
+/.venv/
+/ENV/
+
+# PyCharm specific files
+.idea/
+*.iml
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Python cache
+*.py[cod]
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Logs and databases
+*.log
+*.sql
+*.sqlite3
+
+# Coverage reports
+htmlcov/
+.coverage
+.tox/
+dist/
+build/
+*.egg-info/
+
+.pytest_cache/
+.vscode/
+
+**/migrations/*.py
+!**/migrations/__init__.py

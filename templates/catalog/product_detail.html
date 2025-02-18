@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2 class="text-center">{{ product.name }}</h2>
+    
+    <div class="row align-items-start">
+        <!-- Левая часть: изображение -->
+        <div class="col-md-6 text-center">
+            <img src="{{ product.image.url }}" class="img-fluid product-img" alt="{{ product.name }}">
+        </div>
+
+        <!-- Правая часть: описание, цена, кнопка -->
+        <div class="col-md-6">
+            <p>{{ product.description }}</p>
+            <p class="price">Цена: <strong>{{ product.price }} руб.</strong></p>
+            <a href="{% url 'add_to_cart' product.id %}" class="btn btn-dark">Добавить в корзину</a>
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- Отзывы -->
+    <h3 class="text-center">Отзывы</h3>
+    {% if reviews %}
+        <div class="reviews-container">
+            {% for review in reviews %}
+                <div class="review-card">
+                    <h5>{{ review.user.username }}</h5>
+                    <p>{{ review.comment }}</p>
+                    <small class="custom-date">{{ review.created_at }}</small>
+                    <p>Рейтинг: ⭐ {{ review.rating }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-center">Нет отзывов</p>
+    {% endif %}
+
+    {% if user.is_authenticated %}
+        <h3 class="text-center">Оставить отзыв</h3>
+        <form method="post" class="review-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Опубликовать отзыв</button>
+        </form>
+    {% else %}
+        <p class="text-center">Пожалуйста, <a href="{% url 'login' %}">войдите</a>, чтобы оставить отзыв</p>
+    {% endif %}
+</div>
+{% endblock %}

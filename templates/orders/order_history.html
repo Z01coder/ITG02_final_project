@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Order History</h2>
+<table class="table custom-table">
+    <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for order in orders %}
+        <tr>
+            <td>{{ order.id }}</td>
+            <td>{{ order.order_date }}</td>
+            <td>{{ order.get_status_display }}</td>
+            <td>
+                {% for item in order.orderitem_set.all %}
+                    {{ item.quantity }} x {{ item.product.name }}<br>
+                {% endfor %}
+            </td>
+            <td>
+                <a href="{% url 'repeat_order' order.id %}" class="btn btn-dark">Повторить заказ</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,152 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flower Shop</title>
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Semi+Condensed:ital,wght@0,1..1000;1,1..1000&display=swap" rel="stylesheet">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+    
+        .content-overlay {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+    
+        main {
+            flex: 1;
+        }
+    
+        body {
+            font-family: "Sofia Sans Semi Condensed", serif;
+            font-optical-sizing: auto;
+            font-weight: 350;
+            font-style: normal;
+            font-size: 18px;
+            color: white;
+            position: relative;
+            z-index: 1;
+        }
+    
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+    
+        .navbar-brand {
+            font-size: 24px;
+            font-weight: bold;
+        }
+    
+        .content-overlay {
+            position: relative;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 1px;
+        }
+    
+        header, footer {
+            background: rgba(0, 0, 0, 0.3);
+            color: white;
+            width: 100%;
+            margin: 10px auto;
+            padding: 1px 0;
+
+        }
+    
+        .nav-link, .navbar-brand, footer a {
+            color: white !important;
+        }
+    
+        footer {
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <video autoplay muted loop class="video-background">
+        <source src="/static/videos/background.webm" type="video/webm">
+        Ваш браузер не поддерживает видео тег.
+    </video>
+
+    <div class="content-overlay">
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-light w-100 text-center">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="{% url 'home' %}">Цвет 25 Весны</a>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'home' %}">Главная</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'product_list' %}">Каталог</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'view_cart' %}">Корзина</a>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav ms-auto">
+                            {% if user.is_authenticated %}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'profile' %}">Личная страница</a>
+                                </li>
+                                <li class="nav-item d-flex align-items-center">
+                                    <form method="post" action="{% url 'logout' %}" class="d-inline">
+                                        {% csrf_token %}
+                                        <button type="submit" class="nav-link btn btn-link" style="border: none; background: none; padding: 0; font: inherit; color: inherit; text-decoration: none;">
+                                            Выйти
+                                        </button>
+                                    </form>
+                                </li>
+                            {% else %}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'login' %}">Войти</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'register' %}">Регистрация</a>
+                                </li>
+                            {% endif %}
+                            {% if user.is_superuser %}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'analytics' %}">Аналитика</a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="container mt-4">
+            {% block content %}
+            {% endblock %}
+        </main>
+
+        <footer class="text-center text-lg-start mt-4">
+            <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0);">
+                © 2025 flow-twenty-five:
+                <a href="#">VK</a> |
+                <a href="#">Telegram</a> |
+                <a href="#">RuTube</a>
+            </div>
+        </footer>
+    </div>
+
+    <script src="/static/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

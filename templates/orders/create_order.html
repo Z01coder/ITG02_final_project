@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="alert alert-warning text-center mt-4" style="background-color: rgba(255, 255, 0, 0.2); color: white; padding: 15px; border-radius: 5px;">
+    <strong>Уважаемые покупатели!</strong><br>
+    Пожалуйста, обратите внимание, что ваш заказ будет принят в обработку в рабочее время нашего магазина: <br>
+    <strong>без выходных с 08:00 до 23:00</strong>. <br>
+    Спасибо за понимание!
+</div>
+<div class="text-center">  <!-- Добавляем контейнер для центрирования -->
+    <h2>Оформление заказа</h2>
+</div>
+<form method="post">
+    {% csrf_token %}
+    <div class="form-container">
+    {% for field in form %}
+        <div class="form-group">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+            {% if field.errors %}
+                <div class="text-danger">{{ field.errors }}</div>
+            {% endif %}
+        </div>
+    {% endfor %}
+    </div>
+    <div class="text-center mt-3">
+        <button type="submit" class="btn btn-dark">Оформить заказ</button>
+    </div>
+</form>
+{% endblock %}

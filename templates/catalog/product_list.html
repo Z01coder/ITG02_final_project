@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Каталог</h2>
+<div class="row">
+    {% for product in products %}
+    <div class="col-md-4 mb-4">
+        <div class="card" style="background-color: rgba(0, 0, 0, 0.7); color: white;">
+            <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ product.name }}</h5>
+                <p class="card-text">{{ product.price }} руб.</p>
+                <a href="{% url 'product_detail' product.id %}" class="btn btn-dark">Подробнее</a>
+                <a href="{% url 'add_to_cart' product.id %}" class="btn btn-dark ms-3">Добавить в корзину</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

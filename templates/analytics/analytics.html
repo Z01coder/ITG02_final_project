@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Аналитика</h2>
+<table class="table custom-table">
+    <thead>
+        <tr>
+            <th>Дата</th>
+            <th>Всего заказов</th>
+            <th>Выполнено заказов</th>
+            <th>Прибыль</th>
+            <th>Расходы</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for report in reports %}
+        <tr>
+            <td>{{ report.date }}</td>
+            <td>{{ report.total_orders }}</td>
+            <td>{{ report.completed_orders }}</td>
+            <td>{{ report.revenue }} руб.</td>
+            <td>{{ report.expenses }} руб.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
