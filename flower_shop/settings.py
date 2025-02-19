@@ -139,8 +139,8 @@ LOGIN_REDIRECT_URL = 'home'
 LOGIN_URL = '/login/'
 
 # Telegram bot
-TELEGRAM_BOT_TOKEN = "токен"
-TELEGRAM_ADMIN_CHAT_ID = "чат-ID (без кавычек)"
+TELEGRAM_BOT_TOKEN = "токен бота"
+TELEGRAM_ADMIN_CHAT_ID = "ID чата (вписать БЕЗ кавычек)"
 
 LOGGING = {
     'version': 1,

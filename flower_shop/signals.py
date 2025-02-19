@@ -24,7 +24,7 @@ def send_order_notification(sender, instance, created, **kwargs):
     order_items = instance.orderitem_set.all()
 
     caption = (
-        f"🆕 *Новый заказ #{instance.pk}*\n"
+        f"🆕 *Заказ #{instance.pk}*\n"
         f"📅 Дата доставки: {instance.delivery_date.strftime('%d.%m.%Y')}\n"
         f"⏰ Время доставки: {instance.delivery_time.strftime('%H:%M')}\n"
         f"📍 Адрес: {instance.address}\n"
