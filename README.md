@@ -35,6 +35,7 @@ source venv/bin/activate  # Windows: venv\Scripts\activate
 pip install -r requirements.txt
 
 # Миграции
+python manage.py makemigrations flower_shop
 python manage.py migrate
 
 # Запуск
